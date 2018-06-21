@@ -1,0 +1,104 @@
+LinkedIn Learning
+https://www.linkedin.com/learning/django-1-building-a-blog/creating-and-handling-forms
+
+virtual env - PythonEnvironments/blog1 to activate
+source ~/PythonEnvironments/blog1/bin/activate
+
+To create Migrations 
+python manage.py makemigrations Blog
+
+To check out whats the new sql schema
+python manage.py sqlmigrate Blog 0001
+
+To Apply Migrations 
+python manage.py migrate
+
+To Add admin to Post
+add line to Blog/admin.py (admin.site.register(Post))
+
+Add a super user
+python manage.py createsuperuser
+
+Run django server
+python manage.py runserver
+
+Run python with in app shell
+python manage.py shell
+>>> from Blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> type(all_posts)
+<class 'django.db.models.query.QuerySet'>
+
+QuerySet
+https://docs.djangoproject.com/en/dev/ref/models/querysets/
+
+>>> Post.objects.filter(publish__year=2018, author__username='ajitsen')
+<QuerySet [<Post: Another title>, <Post: Second Post in Django>, <Post: First Post Title>]>
+
+Exclude
+>>> Post.objects.filter(publish__year=2018, author__username='ajitsen').exclude(title__startswith='First')
+<QuerySet [<Post: Another title>, <Post: Second Post in Django>]>
+
+OrderBy
+>>> Post.objects.all().order_by('-title')
+<QuerySet [<Post: Second Post in Django>, <Post: First Post Title>, <Post: Another title>]>
+>>> Post.objects.all().order_by('title')
+<QuerySet [<Post: Another title>, <Post: First Post Title>, <Post: Second Post in Django>]>
+
+Delete an object >> Deleting objects also delete depending relationships
+>>> post = Post.objects.get(id=1)
+>>> post.title
+'First Post Title'
+>>> post.delete()
+(1, {'Blog.Post': 1})
+>>> Post.objects.all()
+<QuerySet [<Post: Another title>, <Post: Second Post in Django>]>
+
+
+Query Set are not executed until we use them, eg iterate over them, slice them etc.
+
+
+Model Managers:- .objects is the default manager for all Models.
+----
+create a class Extending models.Manager in models.py
+
+Example
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super(PublishedManager, self).get_queryset().filter(status='published')
+
+(blog1) ajitsen@shaan-HP-EliteBook-Folio-9470m ~/PycharmProjects/LearnDjano/Blog1 $ python manage.py shell
+(InteractiveConsole)
+>>> from Blog.models import Post
+>>> Post.objects.all()
+<QuerySet [<Post: Another title>, <Post: Second Post in Django>]>
+>>> Post.published.all()
+<QuerySet [<Post: Another title>]>
+Only one was set published.
+
+Building a list and detailed View:-
+----------------------------------
+add views to views.py get data using manager, then render using render()
+
+add urls.py entries to Blog and include Blog/urls.py to main urls.py
+
+path & re_path ( previously url() that used regular expression )
+
+Templates:-
+----------
+Views refer to template to present data in user friendly fashion
+now add Blog/templates/blog/post  directory with blog/base.html that will be inherited by other html files
+https://docs.djangoproject.com/en/2.0/ref/templates/builtins/
+
+use {% block <block_name> %} in base.html and override on inherited template
+
+Pagination
+----------
+get all data
+pass to Paginator(all_data, 3) # 3 is items in a single page
+
+
+Form Fields
+----------
+Django provides forms.Form to help validate and generate html form snippet
+https://docs.djangoproject.com/en/2.0/ref/forms/fields/
