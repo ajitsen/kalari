@@ -60,6 +60,7 @@ Query Set are not executed until we use them, eg iterate over them, slice them e
 
 Model Managers:- .objects is the default manager for all Models.
 ----
+Managers for related objects = post.comments.filter()
 create a class Extending models.Manager in models.py
 
 Example
@@ -102,3 +103,28 @@ Form Fields
 ----------
 Django provides forms.Form to help validate and generate html form snippet
 https://docs.djangoproject.com/en/2.0/ref/forms/fields/
+
+Sending a Email
+---------------
+Configure smptp server in the settings.py for our test we can use our gmail
+To test just the email lets run shell
+ $ python manage.py shell
+>>> from django.core.mail import send_mail
+>>> send_mail('Django mail sub', 'This mail was sent with Django', 'tkmsen3@gmail.com', ['ajit.sen.s@gmail.com'])
+1
+>>>
+If above passes with out exceptions the email was sent.
+In gmail, we have to enable support for less secure apps to login.
+https://myaccount.google.com/security?utm_source=OGB&utm_medium=act&pli=1#connectedapps
+https://support.google.com/accounts/answer/6010255
+
+Create a Comment section to blog
+--------------------------------
+Add Comment to models.py
+Add Comments to admin.py
+Add CommentForm to forms.py
+Add show_comments in view.py post_detail
+Add template for comment in details.html
+
+
+
