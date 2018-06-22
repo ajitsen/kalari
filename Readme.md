@@ -4,6 +4,7 @@ A Kalari [1](https://en.wikipedia.org/wiki/Kalari) is a traditional training spa
 
 ## Urumi - Learning Django
 ![Urumi](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Ethunu_kaduwa.jpg/220px-Ethunu_kaduwa.jpg)
+
 Django quite flexible like [Urumi](https://en.wikipedia.org/wiki/Urumi). Hope its not as tough to learn as the swirling sword.
 
 
