@@ -40,3 +40,9 @@ anagram_fast('dictionary')
 popular_len_anag = sorted(anagram_by_len.items(), key=lambda kv: -kv[1])
 
 popular_len_anag = sorted(anagram_by_len.items(), key=lambda kv: (-kv[1], kv[0])) # sort by reverse value, then key
+
+
+## NumPy
+Data types have to be declared unlike python, the variables now can sit next to one another like a c array. this will make the processing highly performant. 
+Eg: numpy.float64 numpy.int32 etc 
+
