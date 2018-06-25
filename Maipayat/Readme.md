@@ -1,6 +1,7 @@
 # Learning Python data analysis.
 
 `*.ipynb files are jupyter-notebook files`
+https://www.linkedin.com/learning/python-data-analysis
 
 ## Anagram
 
